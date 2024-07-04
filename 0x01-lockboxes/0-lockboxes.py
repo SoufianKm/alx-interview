@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Module that checks locked boxes """
 
 
 def canUnlockAll(boxes):
