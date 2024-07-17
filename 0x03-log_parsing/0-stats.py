@@ -23,7 +23,7 @@ def print_statistics(stats, total_size):
     """
     Print the total file size and the number of lines per status code.
     """
-    print("Total file size: {}".format(total_size))
+    print("File size: {}".format(total_size))
     for status_code in sorted(stats.keys()):
         if stats[status_code] > 0:
             print("{}: {}".format(status_code, stats[status_code]))
