@@ -1,4 +1,6 @@
 #!/usr/bin/node
+// Script that prints all characters of a Star Wars movie
+
 
 /**
  * Wrapper function for request object that allows it
@@ -17,6 +19,7 @@ function makeRequest(url) {
     });
   });
 }
+
 
 /**
  * Entry point - makes requests to Star Wars API
@@ -37,5 +40,6 @@ async function main() {
     console.log(character.name);
   }
 }
+
 
 main();
