@@ -1,5 +1,7 @@
 #!/usr/bin/node
-// Script that prints all characters of a Star Wars movie
+// script that prints all characters of a Star Wars movie
+
+const request = require('request');
 
 
 /**
@@ -10,12 +12,14 @@
  *                         with parsed JSON response
  *                         and rejects with the request error.
  */
-function makeRequest(url) {
-  const request = require('request');
+function makeRequest (url) {
   return new Promise((resolve, reject) => {
     request.get(url, (error, response, body) => {
-      if (error) reject(error);
-      else resolve(JSON.parse(body));
+      if (error) {
+        reject(error);
+      } else {
+        resolve(JSON.parse(body));
+      }
     });
   });
 }
@@ -27,19 +31,35 @@ function makeRequest(url) {
  * Retrieves movie character info then prints their names
  * in order of appearance in the initial response.
  */
-async function main() {
+async function main () {
   const args = process.argv;
-  if (args.length < 3) return;
 
+  // Ensure a movie ID is provided as a command-line argument
+  if (args.length < 3) {
+    return;
+  }
+
+  // Construct the movie URL using the provided movie ID
   const movieUrl = 'https://swapi-api.alx-tools.com/api/films/' + args[2];
-  const movie = await makeRequest(movieUrl);
-  if (movie.characters === undefined) return;
 
-  for (const characterUrl of movie.characters) {
-    const character = await makeRequest(characterUrl);
-    console.log(character.name);
+  try {
+    // Fetch the movie details
+    const movie = await makeRequest(movieUrl);
+
+    // Ensure the movie has characters
+    if (!movie.characters) {
+      return;
+    }
+
+    // Fetch and print each character's name
+    for (const characterUrl of movie.characters) {
+      const character = await makeRequest(characterUrl);
+      console.log(character.name);
+    }
+  } catch (error) {
+    console.error('Error:', error);
   }
 }
 
-
+// Run the main function
 main();
