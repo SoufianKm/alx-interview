@@ -3,7 +3,6 @@
 
 const request = require('request');
 
-
 /**
  * Wrapper function for request object that allows it
  * to work with async and await.
@@ -23,7 +22,6 @@ function makeRequest (url) {
     });
   });
 }
-
 
 /**
  * Entry point - makes requests to Star Wars API
